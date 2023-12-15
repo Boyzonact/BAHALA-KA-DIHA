@@ -1,0 +1,101 @@
+[gd_scene load_steps=14 format=3 uid="uid://dcmkr71dw8ywc"]
+
+[ext_resource type="Texture2D" uid="uid://cvenjm2rx8sfd" path="res://assets/art/decorations/shop_anim.png" id="1_gaevk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08wsu"]
+atlas = ExtResource("1_gaevk")
+region = Rect2(0, 0, 118, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcbmr"]
+atlas = ExtResource("1_gaevk")
+region = Rect2(118, 0, 118, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udac2"]
+atlas = ExtResource("1_gaevk")
+region = Rect2(236, 0, 118, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ig81"]
+atlas = ExtResource("1_gaevk")
+region = Rect2(354, 0, 118, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvd6b"]
+atlas = ExtResource("1_gaevk")
+region = Rect2(472, 0, 118, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuiuo"]
+atlas = ExtResource("1_gaevk")
+region = Rect2(590, 0, 118, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tc2aq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08wsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcbmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udac2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ig81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvd6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuiuo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1v0li"]
+radius = 63.6318
+
+[sub_resource type="Gradient" id="Gradient_eiqch"]
+offsets = PackedFloat32Array(0, 0.84472)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_31ywt"]
+gradient = SubResource("Gradient_eiqch")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_iwf1b"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tnyue"]
+gradient = SubResource("Gradient_iwf1b")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="shop" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2.1)
+sprite_frames = SubResource("SpriteFrames_tc2aq")
+autoplay = "default"
+frame_progress = 0.487956
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.5)
+shape = SubResource("CircleShape2D_1v0li")
+disabled = true
+one_way_collision = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(96, 96)
+color = Color(0.996078, 0.807843, 0.415686, 1)
+energy = 1.9
+texture = SubResource("GradientTexture2D_31ywt")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(-96, 96)
+color = Color(0.996078, 0.815686, 0.329412, 1)
+energy = 1.9
+texture = SubResource("GradientTexture2D_tnyue")
