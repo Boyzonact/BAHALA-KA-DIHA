@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://duyi88romhv04"]
+
+[ext_resource type="PackedScene" uid="uid://cfeylrtfq5mb6" path="res://stage_3_level_2.tscn" id="1_4frd2"]
+[ext_resource type="PackedScene" uid="uid://btbckux2gqeru" path="res://scenes/characters/character.tscn" id="2_nymua"]
+[ext_resource type="PackedScene" uid="uid://tbg3uqnr7pg5" path="res://assets/mob holders/skel.tscn" id="3_12gct"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Stage3_level2" parent="." instance=ExtResource("1_4frd2")]
+
+[node name="Jinbei" parent="." instance=ExtResource("2_nymua")]
+position = Vector2(56, 597)
+
+[node name="Camera2D" type="Camera2D" parent="Jinbei"]
+
+[node name="skel" parent="." instance=ExtResource("3_12gct")]
+position = Vector2(363, 581)
