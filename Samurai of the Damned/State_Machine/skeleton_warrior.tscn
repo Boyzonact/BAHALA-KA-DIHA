@@ -1,0 +1,181 @@
+[gd_scene load_steps=25 format=3 uid="uid://diiyl0e7vmo2e"]
+
+[ext_resource type="Texture2D" uid="uid://oe8s17d6bvbc" path="res://skeleton_warrior/Idle.png" id="1_imcje"]
+[ext_resource type="Texture2D" uid="uid://dh2o1axlrk8lg" path="res://skeleton_warrior/Walk.png" id="2_e2phg"]
+[ext_resource type="Script" path="res://State_Machine/gravity.gd" id="2_ohwfq"]
+[ext_resource type="Script" path="res://State_Machine/statemachine.gd" id="3_6uxxd"]
+[ext_resource type="Script" path="res://State_Machine/statemachinecontroller.gd" id="3_pj1wh"]
+[ext_resource type="Script" path="res://State_Machine/chase_state.gd" id="4_liu76"]
+[ext_resource type="Script" path="res://State_Machine/idle_state.gd" id="6_khdhg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uf0d"]
+atlas = ExtResource("1_imcje")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v563l"]
+atlas = ExtResource("1_imcje")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iv4aa"]
+atlas = ExtResource("1_imcje")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xso8"]
+atlas = ExtResource("1_imcje")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4y4c"]
+atlas = ExtResource("1_imcje")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sowwo"]
+atlas = ExtResource("1_imcje")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbxsh"]
+atlas = ExtResource("1_imcje")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrgqt"]
+atlas = ExtResource("2_e2phg")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8m2aj"]
+atlas = ExtResource("2_e2phg")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydm8g"]
+atlas = ExtResource("2_e2phg")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbkec"]
+atlas = ExtResource("2_e2phg")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1xsl"]
+atlas = ExtResource("2_e2phg")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3e8y7"]
+atlas = ExtResource("2_e2phg")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhlph"]
+atlas = ExtResource("2_e2phg")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kmf13"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uf0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v563l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iv4aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xso8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4y4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sowwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbxsh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrgqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8m2aj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydm8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbkec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1xsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3e8y7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhlph")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_01nq4"]
+radius = 14.0
+height = 62.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_epc5d"]
+radius = 207.155
+
+[node name="skeleton_warrior" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, -33)
+sprite_frames = SubResource("SpriteFrames_kmf13")
+animation = &"idle"
+frame = 6
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_01nq4")
+
+[node name="floor check" type="RayCast2D" parent="."]
+target_position = Vector2(0, 37)
+collide_with_areas = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_epc5d")
+debug_color = Color(0.733333, 0, 0.0431373, 0.419608)
+
+[node name="gravity" type="Node2D" parent="." node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
+script = ExtResource("2_ohwfq")
+character_body_2d = NodePath("..")
+animated_sprite_2d = NodePath("../AnimatedSprite2D")
+
+[node name="statemachinecontroller" type="Node2D" parent="." node_paths=PackedStringArray("node_finite_state_machine", "character_body_2d")]
+script = ExtResource("3_pj1wh")
+node_finite_state_machine = NodePath("../statemachine")
+character_body_2d = NodePath("..")
+
+[node name="statemachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("3_6uxxd")
+initial_node_state = NodePath("idle")
+
+[node name="chase" type="Node2D" parent="statemachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d", "collision_shape_2d", "ray_cast_2d")]
+script = ExtResource("4_liu76")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+collision_shape_2d = NodePath("../../CollisionShape2D")
+ray_cast_2d = NodePath("../../floor check")
+speed = 50
+
+[node name="idle" type="Node2D" parent="statemachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d")]
+script = ExtResource("6_khdhg")
+character_body_2d = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="patrol" type="Node2D" parent="statemachine"]
+
+[connection signal="body_entered" from="Area2D" to="statemachinecontroller" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="statemachinecontroller" method="_on_area_2d_body_exited"]
