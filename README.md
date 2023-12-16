@@ -1,1 +1,0 @@
-# SOTD_GROUPA

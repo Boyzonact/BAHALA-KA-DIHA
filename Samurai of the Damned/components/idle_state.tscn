@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdsduu54y7wt8"]
-
-[ext_resource type="Script" path="res://State_Machine/idle_state.gd" id="1_odvbu"]
-
-[node name="idle" type="Node2D"]
-script = ExtResource("1_odvbu")
