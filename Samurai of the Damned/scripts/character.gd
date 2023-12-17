@@ -166,6 +166,6 @@ func _on_hurtbox_body_entered(body:Node2D):
 	
 	if body.is_in_group("Enemy"):
 		print("nay kuntra", body.damage_amount)
-		
+		animated_sprite_2d.play("hurt")
 		HealthManager.decrease_HP(body.damage_amount)
 		print("afatay",body.damage_amount)
