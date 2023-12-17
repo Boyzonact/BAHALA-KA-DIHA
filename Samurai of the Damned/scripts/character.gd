@@ -2,24 +2,24 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
-const gravity = 1000
+const gravity =1350
 
-const dalagan = 200
+const dalagan = 650
 
-@export var max_horizontal_speed: int = 300
+@export var max_horizontal_speed: int = 400
 
-@export var slow_down_speed: int = 3000
+@export var slow_down_speed: int = 8500
 
-@export var jump: int = -450
+@export var jump: int = -500
 
-@export var jump_horizontal_speed: int = 1000
+@export var jump_horizontal_speed: int = 3000
 
-@export var max_jump_horizontal_speed: int = 300
+@export var max_jump_horizontal_speed: int = 400
 
-@export var jump_count: int = 1
+@export var jump_count: int = 2
 
 
-enum State { barog, dagan, layat, tagak, Hapak }
+enum State { barog, dagan, layat, tagak, Hapak}
 
 var current_state
 
@@ -28,6 +28,11 @@ var current_jump_count: int
 var attack_cooldown: float = 0.5  # Adjust the cooldown time as needed
 
 var time_since_last_attack: float = 0.0
+
+var layat_kaduha = 2
+
+var layat_ihap=0
+
 
 func _ready():
 	
@@ -121,7 +126,7 @@ func player_jump(delta: float):
 
 func player_attack(delta):
 	
-	if Input.is_action_just_pressed("attacks"):
+	if Input.is_action_just_pressed("attackz"):
 		
 		current_state = State.Hapak
 		
@@ -129,15 +134,15 @@ func player_attack(delta):
 
 func player_animations():
 	
-	if current_state == State.barog and animated_sprite_2d.animation != "attacks":
+	if current_state == State.barog and animated_sprite_2d.animation != "attackz":
 		
 		animated_sprite_2d.play("idle")
 		
-	elif current_state == State.dagan:
+	elif current_state == State.dagan and animated_sprite_2d.animation != "hurt":
 		
 		animated_sprite_2d.play("run")
 		
-	elif current_state == State.layat:
+	elif current_state == State.layat and animated_sprite_2d.animation != "hurt":
 		
 		animated_sprite_2d.play("jump")
 		
@@ -145,9 +150,9 @@ func player_animations():
 		
 		animated_sprite_2d.play("fall")
 		
-	elif current_state == State.Hapak:
+	elif current_state == State.Hapak and animated_sprite_2d.animation != "hurt":
 		
-		animated_sprite_2d.play("attacks")
+		animated_sprite_2d.play("attackz")
 
 func input_movement():
 	
@@ -158,6 +163,9 @@ func input_movement():
 
 
 func _on_hurtbox_body_entered(body:Node2D):
+	
 	if body.is_in_group("Enemy"):
 		print("nay kuntra", body.damage_amount)
+		
 		HealthManager.decrease_HP(body.damage_amount)
+		print("afatay",body.damage_amount)
