@@ -7374,7 +7374,7 @@ texture = ExtResource("2_2pa2i")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_rsa3v")
 
-[node name="level1" type="Node2D"]
+[node name="2" type="Node2D"]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_61p3e")]
 

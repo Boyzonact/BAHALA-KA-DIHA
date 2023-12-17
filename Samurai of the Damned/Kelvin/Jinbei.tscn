@@ -1,0 +1,99 @@
+[gd_scene load_steps=16 format=3 uid="uid://dmtr40om5q8ey"]
+
+[ext_resource type="Texture2D" uid="uid://b0e44xqo2ipti" path="res://Kelvin/Sprites/Attack1.png" id="1_kbp46"]
+[ext_resource type="Script" path="res://Kelvin/Player.gd" id="1_xi76i"]
+[ext_resource type="Script" path="res://Kelvin/Scripts/player_state_machine.gd" id="2_jbgkx"]
+[ext_resource type="Script" path="res://Kelvin/Scripts/attack_state.gd" id="3_ipuei"]
+[ext_resource type="Script" path="res://Kelvin/Scripts/idle_state.gd" id="4_se6s1"]
+[ext_resource type="Script" path="res://Kelvin/Scripts/jump_state.gd" id="5_pw3w7"]
+[ext_resource type="Script" path="res://Kelvin/Scripts/dead_state.gd" id="6_oqr6p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmbsd"]
+atlas = ExtResource("1_kbp46")
+region = Rect2(0, 0, 135, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2dlm"]
+atlas = ExtResource("1_kbp46")
+region = Rect2(135, 0, 135, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh3s6"]
+atlas = ExtResource("1_kbp46")
+region = Rect2(270, 0, 135, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyam2"]
+atlas = ExtResource("1_kbp46")
+region = Rect2(405, 0, 135, 135)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gebn2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmbsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2dlm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh3s6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyam2")
+}],
+"loop": true,
+"name": &"attack 1",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"attack 2",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q3alf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rno03"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ajke"]
+
+[node name="Jinbei" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
+script = ExtResource("1_xi76i")
+state_machine = NodePath("StateMachine")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gebn2")
+animation = &"attack 2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_q3alf")
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_rno03")
+
+[node name="Sword" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
+shape = SubResource("CircleShape2D_1ajke")
+
+[node name="Attack Range" type="Marker2D" parent="."]
+
+[node name="Gravity" type="Node2D" parent="."]
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_player_node_state")]
+script = ExtResource("2_jbgkx")
+initial_player_node_state = NodePath("idle")
+
+[node name="attack" type="Node2D" parent="StateMachine"]
+script = ExtResource("3_ipuei")
+
+[node name="idle" type="Node2D" parent="StateMachine"]
+script = ExtResource("4_se6s1")
+
+[node name="jump" type="Node2D" parent="StateMachine"]
+script = ExtResource("5_pw3w7")
+
+[node name="dead" type="Node2D" parent="StateMachine"]
+script = ExtResource("6_oqr6p")
+
+[node name="walk" type="Node" parent="StateMachine"]
