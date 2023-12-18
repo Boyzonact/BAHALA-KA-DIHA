@@ -39,7 +39,7 @@ func transitioner():
 						jump = false
 						state_machine.transition_to("jump")
 					elif walk:
-						state_machine.transition_to("walk")
+						state_machine.transition_to("walk") and animation_done.play("idle")
 					elif attack:
 						can_transition = false
 						attacking= true

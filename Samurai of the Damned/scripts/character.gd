@@ -155,16 +155,27 @@ func player_animations():
 		
 	elif current_state == State.Hapak and animated_sprite_2d.animation != "hurt":
 		attack_done =  false
+		
 		if hitzone.position > hit_range.position:
+			
 			swing_direction = -1
+			
 		elif hitzone.position < hit_range.position:
+			
 			swing_direction = 1
+			
 		elif hitzone.position == hit_range.position:
+			
 			swing_direction = 0
+			
 		swing_handler()
+		
 		_on_animated_sprite_2d_animation_finished()
+		
 		if attack_done:
+			
 			hitzone.position = sword.position
+			
 		animated_sprite_2d.play("attackz")
 
 
@@ -187,10 +198,14 @@ func _on_hurtbox_body_entered(body: Node2D):
 		print("afatay", body.damage_amount)
 		
 	if HealthManager.currentHP==0:
+		
 		animated_sprite_2d.play("death")
 
 
 func _on_animated_sprite_2d_animation_finished():
+	
 	attack_done = true
+	
 func swing_handler():
+	
 	hitzone.move_local_x(1*swing_direction)

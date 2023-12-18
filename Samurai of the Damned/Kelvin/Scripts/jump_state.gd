@@ -2,7 +2,7 @@ extends PlayerNodeState
 @export var character_body_2d : CharacterBody2D
 @export var animated_sprite_2d : AnimatedSprite2D
 @export var jump_force : int
-@export var SPEED = 50
+@export var SPEED = 200
 func on_process(delta : float):
 	pass
 
