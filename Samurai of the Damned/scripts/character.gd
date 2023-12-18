@@ -6,8 +6,11 @@ extends CharacterBody2D
 @export var hit_range : Marker2D
 
 const gravity = 1350
+
 var swing_direction : int
+
 const dalagan = 650
+
 var direction : int
 
 @export var max_horizontal_speed: int = 400
@@ -33,7 +36,9 @@ var attack_cooldown: float = 0.5
 var time_since_last_attack: float = 0.0
 
 var layat_kaduha = 2
+
 var attack_done = true
+
 var layat_ihap = 0
 
 func _ready():
@@ -131,6 +136,7 @@ func player_jump(delta: float):
 func player_attack(delta):
 	
 	if Input.is_action_just_pressed("attackz"):
+		
 		current_state = State.Hapak
 		
 		print("Attacking!")
@@ -154,6 +160,7 @@ func player_animations():
 		animated_sprite_2d.play("fall")
 		
 	elif current_state == State.Hapak and animated_sprite_2d.animation != "hurt":
+		
 		attack_done =  false
 		
 		if hitzone.position > hit_range.position:
