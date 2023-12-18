@@ -1,11 +1,16 @@
 extends PlayerNodeState
+@export var character_body_2d : CharacterBody2D
+@export var animated_sprite_2d : AnimatedSprite2D
+func on_process(delta : float):
+	pass
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func on_physics_process(delta : float):
+	animated_sprite_2d.play("idle")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func enter():
+	character_body_2d.velocity.x = 0
+	character_body_2d.move_and_slide()
+func exit():
 	pass
